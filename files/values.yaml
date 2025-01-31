@@ -14,7 +14,7 @@ extraManifests:
     metadata:
       name: amd64
       annotations:
-        kubernetes.io/description: "NodePool for amd64 workloads"
+        kubernetes.io/description: "NodePool for arm64 workloads"
       labels:
         instance-type: graviton-amd64
     spec:
@@ -23,7 +23,7 @@ extraManifests:
           requirements:
             - key: kubernetes.io/arch
               operator: In
-              values: ["amd64"]
+              values: ["arm64"] 
             - key: kubernetes.io/os
               operator: In
               values: ["linux"]
@@ -47,18 +47,18 @@ extraManifests:
   - apiVersion: karpenter.sh/v1
     kind: NodePool
     metadata:
-      name: arm64
+      name: amd64 # also x86
       annotations:
-        kubernetes.io/description: "NodePool for arm64 workloads"
+        kubernetes.io/description: "NodePool for amd64 workloads"
       labels:
-        instance-type: spot-arm64
+        instance-type: spot-amd64
     spec:
       template:
         spec:
           requirements:
             - key: kubernetes.io/arch
               operator: In
-              values: ["arm64"]
+              values: ["amd64"]
             - key: kubernetes.io/os
               operator: In
               values: ["linux"]

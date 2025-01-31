@@ -1,0 +1,48 @@
+## this deployment shows an example on how to deploy a pod to graviton/arm64 node
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm64 
+      containers:
+      - name: my-app-container
+        image: my-image:latest 
+        ports:
+        - containerPort: 8080
+
+## this deployment shows an example on how to deploy a pod to x86/amd64 node
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64 
+      containers:
+      - name: my-app-container
+        image: my-image:latest 
+        ports:
+        - containerPort: 8080
